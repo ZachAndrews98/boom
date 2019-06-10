@@ -9,7 +9,7 @@ return {
   tilewidth = 16,
   tileheight = 16,
   nextlayerid = 5,
-  nextobjectid = 44,
+  nextobjectid = 45,
   properties = {},
   tilesets = {
     {
@@ -368,10 +368,25 @@ return {
           name = "box1",
           type = "physbox",
           shape = "rectangle",
-          x = 62.9677,
-          y = 237.252,
-          width = 15.7418,
-          height = 16.304,
+          x = 60.7189,
+          y = 265.362,
+          width = 16,
+          height = 16,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["type"] = "dynamic"
+          }
+        },
+        {
+          id = 44,
+          name = "box2",
+          type = "physbox",
+          shape = "rectangle",
+          x = 80.958,
+          y = 249.621,
+          width = 16,
+          height = 32,
           rotation = 0,
           visible = true,
           properties = {
