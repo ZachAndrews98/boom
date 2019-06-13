@@ -42,4 +42,14 @@ function assets.map(name)
     return require(prefixes.maps .. name)
 end
 
+--[[
+    assets.font(name, size)
+
+    loads a font from assets/fonts/<name>.ttf with pixel size <size>
+--]]
+
+function assets.font(name, size)
+    return love.graphics.newFont('src/assets/fonts/' .. name .. '.ttf', size)
+end
+
 return assets
