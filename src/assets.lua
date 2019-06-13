@@ -49,7 +49,7 @@ end
 --]]
 
 function assets.font(name, size)
-    return love.graphics.newFont('src/assets/fonts/' .. name .. '.ttf', size)
+    return love.graphics.newFont('assets/fonts/' .. name .. '.ttf', size)
 end
 
 return assets
