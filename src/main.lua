@@ -3,7 +3,9 @@
     entry point
 --]]
 
+local assets = require 'assets'
 local camera = require 'camera'
+local dialog = require 'dialog'
 local map = require 'map'
 local options = require 'options'
 
@@ -14,6 +16,9 @@ function love.load()
 
     -- use nearest filtering over "blurry" linear filtering
     love.graphics.setDefaultFilter('linear', 'nearest')
+
+    -- set default font
+    love.graphics.setFont(assets.font('pixeled'))
 
     map.load('test')
 end
@@ -27,11 +32,13 @@ end
 
 function love.update(dt)
     map.update(dt)
+    dialog.update(dt)
 end
 
 function love.draw()
     camera.apply()
     map.render()
+    dialog.render()
 
     if love.keyboard.isDown('p') then
         map.render_phys_debug()
