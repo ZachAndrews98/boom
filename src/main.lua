@@ -17,6 +17,9 @@ function love.load()
     -- use nearest filtering over "blurry" linear filtering
     love.graphics.setDefaultFilter('linear', 'nearest')
 
+    -- init dialog
+    dialog.load()
+
     -- set default font
     love.graphics.setFont(assets.font('pixeled'))
 
