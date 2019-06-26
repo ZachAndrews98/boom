@@ -87,7 +87,7 @@ return {
         if self.render then
             -- shatter the box
             -- here we'll subdivide the backdrop into a bunch of pieces
-            
+
             local line = self.lines[self.current_line]
             local line_to_render = string.sub(line.text, 0, self.current_char)
             local text_width, text_height = self.font:getWidth(line_to_render), self.font:getHeight()
@@ -137,7 +137,7 @@ return {
                 })
             end
         end
-        
+
         obj.destroy(self)
     end,
 
