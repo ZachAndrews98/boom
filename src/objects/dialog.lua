@@ -38,6 +38,7 @@ return {
         self.tri_size = self.tri_size or 6
         self.offset_y = self.offset_y or 10
         self.font = assets.font('pixeled', 6)
+        self.shatter_points = 8
 
         -- state
         self.callbacks = {}
@@ -69,11 +70,6 @@ return {
         end
     end,
 
-    explode = function(self)
-        -- shatter?
-        obj.destroy(self)
-    end,
-
     destroy = function(self)
         -- release the lock if we're holding it (we always should be)
         if dialog_lock == self then
@@ -83,6 +79,65 @@ return {
         for _, v in ipairs(self.callbacks) do
             v.callback(v.ud)
         end
+    end,
+
+    explode = function(self, _, _)
+        print('Exploding dialog, render = ' .. tostring(self.render))
+
+        if self.render then
+            -- shatter the box
+            -- here we'll subdivide the backdrop into a bunch of pieces
+            
+            local line = self.lines[self.current_line]
+            local text_width, text_height = self.font:getWidth(line.text), self.font:getHeight()
+            local box_width, box_height = text_width + 2 * self.padding_x, text_height + 2 * self.padding_y
+
+            -- center point of the dialog box
+            local center_x, center_y = line.follow.x + line.follow.w / 2, line.follow.y - self.offset_y - box_height / 2
+
+            -- compute top and bottom shatter points
+            local top_points, bottom_points = {}, {}
+
+            for i=1,self.shatter_points do
+                table.insert(top_points, math.random(box_width))
+                table.insert(bottom_points, math.random(box_width))
+            end
+
+            table.sort(top_points)
+            table.sort(bottom_points)
+
+            local box_left = center_x - box_width / 2
+            local box_top = center_y - box_height / 2
+            local box_right = center_x + box_width / 2
+            local box_bottom = center_y + box_height / 2
+
+            -- from shatter points, construct gib objects
+            for i=0,self.shatter_points do
+                local x1, x2, x3, x4 = nil, nil, nil, nil -- x values
+
+                if i == 0 then
+                    x1 = box_left
+                    x2 = box_left
+                else
+                    x1 = top_points[i]
+                    x2 = bottom_points[i]
+                end
+
+                if i == self.shatter_points then
+                    x3 = box_right
+                    x4 = box_right
+                else
+                    x3 = top_points[i + 1]
+                    x4 = bottom_points[i + 1]
+                end
+
+                obj.create(self.__layer, 'gib_dialog', {
+                    points = { x1, box_top, x3, box_top, x4, box_bottom, x2, box_bottom }
+                })
+            end
+        end
+        
+        obj.destroy(self)
     end,
 
     update = function(self, dt)
@@ -96,6 +151,11 @@ return {
         end
 
         local line = self.lines[self.current_line]
+
+        self.x = line.follow.x
+        self.y = line.follow.y
+        self.w = line.follow.w
+        self.h = line.follow.h
 
         if self.state == 0 then
             -- typing, advance chars until full
