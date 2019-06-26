@@ -5,7 +5,6 @@
 
 local obj = require 'obj'
 local map = require 'map'
-local sprite = require 'sprite'
 
 return {
     init = function(self)
