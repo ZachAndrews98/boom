@@ -3,7 +3,6 @@
     basic player object
 --]]
 
-local dialog = require 'dialog'
 local map = require 'map'
 local obj = require 'obj'
 local sprite = require 'sprite'
@@ -41,10 +40,14 @@ return {
         self.camera = obj.create(self.__layer, 'camera', { x = self.x + self.w / 2, y = self.y + self.h / 2 })
 
         -- test dialog for the player
-        dialog.run({
-            { text = 'Hello world!' },
-            { text = 'This is my first dialog sequence.' },
-        }, self)
+        obj.create(self.__layer, 'dialog', {
+            follow = self,
+            lines = {
+                { text = 'Whaaaaaaat' },
+                { text = 'Hello there' },
+                { text = 'TYPING SUPER FAST BOI', type_del = 0.01 },
+            }
+        })
     end,
     update = function(self, dt)
         -- update the sprite
