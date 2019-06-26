@@ -40,6 +40,7 @@ return {
         -- test dialog for the player
         obj.create(self.__layer, 'dialog', {
             follow = self,
+            hold_del = 3,
             lines = {
                 { text = 'Whaaaaaaat' },
                 { text = 'Hello there' },

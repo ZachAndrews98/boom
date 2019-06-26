@@ -89,7 +89,8 @@ return {
             -- here we'll subdivide the backdrop into a bunch of pieces
             
             local line = self.lines[self.current_line]
-            local text_width, text_height = self.font:getWidth(line.text), self.font:getHeight()
+            local line_to_render = string.sub(line.text, 0, self.current_char)
+            local text_width, text_height = self.font:getWidth(line_to_render), self.font:getHeight()
             local box_width, box_height = text_width + 2 * self.padding_x, text_height + 2 * self.padding_y
 
             -- center point of the dialog box
@@ -98,7 +99,7 @@ return {
             -- compute top and bottom shatter points
             local top_points, bottom_points = {}, {}
 
-            for i=1,self.shatter_points do
+            for _=1,self.shatter_points do
                 table.insert(top_points, math.random(box_width))
                 table.insert(bottom_points, math.random(box_width))
             end
@@ -113,22 +114,22 @@ return {
 
             -- from shatter points, construct gib objects
             for i=0,self.shatter_points do
-                local x1, x2, x3, x4 = nil, nil, nil, nil -- x values
+                local x1, x2, x3, x4 -- x values
 
                 if i == 0 then
                     x1 = box_left
                     x2 = box_left
                 else
-                    x1 = top_points[i]
-                    x2 = bottom_points[i]
+                    x1 = top_points[i] + box_left
+                    x2 = bottom_points[i] + box_left
                 end
 
                 if i == self.shatter_points then
                     x3 = box_right
                     x4 = box_right
                 else
-                    x3 = top_points[i + 1]
-                    x4 = bottom_points[i + 1]
+                    x3 = top_points[i + 1] + box_left
+                    x4 = bottom_points[i + 1] + box_left
                 end
 
                 obj.create(self.__layer, 'gib_dialog', {
