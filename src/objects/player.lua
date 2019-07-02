@@ -40,19 +40,19 @@ return {
         self.camera = obj.create(self.__layer, 'camera', { x = self.x + self.w / 2, y = self.y + self.h / 2 })
 
         -- member function: create a dust particle under the player's feet
-        self.emit_dust = function(self, num, dx, dy, vdx, vdy, va, ba)
-            local left = self.x + 14
+        self.emit_dust = function(this, num, dx, dy, vdx, vdy, va, ba)
+            local left = this.x + 14
             local width = 10
 
-            if self.direction == 'left' then
+            if this.direction == 'left' then
                 -- player is flipped over, move the base point
-                left = self.x + 12
+                left = this.x + 12
             end
 
-            for i=1,num do
-                obj.create(self.__layer, 'particle_dark', {
+            for _=1,num do
+                obj.create(this.__layer, 'particle_dark', {
                     x = math.random(width) + left,
-                    y = self.y + self.h - 4,
+                    y = this.y + this.h - 4,
                     dx = dx,
                     dy = dy,
                     dx_variation = vdx,

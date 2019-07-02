@@ -1,6 +1,5 @@
 --[[
     particle_dark.lua
-    
     a dark partice which moves with an initial velocity and variation
 --]]
 
@@ -34,7 +33,7 @@ return {
         self.h = self.spr.frame_h
 
         self.alpha = self.alpha_base
-        
+
         -- apply variation
         self.alpha = self.alpha + (math.random(-10, 10) / 10) * self.alpha_variation
         self.dx = self.dx + (math.random(-10, 10) / 10) * self.dx_variation
