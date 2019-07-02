@@ -17,6 +17,8 @@ return {
         self.dx_accel = self.dx_accel or 1600
         self.dx_max = self.dx_max or 150
         self.grenade_dampening = 3
+        self.land_dust_parts = self.dust_parts or 5
+        self.slide_dust_parts = self.dust_parts or 1
 
         -- state
         self.dx = 0
@@ -36,6 +38,30 @@ return {
 
         -- create a camera for the player
         self.camera = obj.create(self.__layer, 'camera', { x = self.x + self.w / 2, y = self.y + self.h / 2 })
+
+        -- member function: create a dust particle under the player's feet
+        self.emit_dust = function(self, num, dx, dy, vdx, vdy, va, ba)
+            local left = self.x + 14
+            local width = 10
+
+            if self.direction == 'left' then
+                -- player is flipped over, move the base point
+                left = self.x + 12
+            end
+
+            for i=1,num do
+                obj.create(self.__layer, 'particle_dark', {
+                    x = math.random(width) + left,
+                    y = self.y + self.h - 4,
+                    dx = dx,
+                    dy = dy,
+                    dx_variation = vdx,
+                    dy_variation = vdy,
+                    alpha_variation = va,
+                    alpha_base = ba,
+                })
+            end
+        end
     end,
     explode = function(self, _, _)
         -- turn the player into gibs
@@ -88,6 +114,7 @@ return {
             else
                 self.dx = math.min(self.dx + self.crouch_decel * dt, 0)
             end
+
         else
             if not self.jump_enabled and not self.is_walking then
                 if self.dx > 0 then
@@ -104,6 +131,11 @@ return {
                     end
                 end
             end
+        end
+
+        if self.jump_enabled and not self.is_walking and math.abs(self.dx) > 40 then
+            -- make the player slide
+            self:emit_dust(self.slide_dust_parts, self.dx / 100, -4, 1, 2, 0.6, 0.3)
         end
 
         -- throw a grenade if we can/should
@@ -180,7 +212,13 @@ return {
             if self.dy >= 0 then
                 -- here it's safer to assume dy==0 -> the player was moving somewhat down-ish
                 self.y = collision.y - self.h
-                self.jump_enabled = true
+
+                if not self.jump_enabled then
+                    self.jump_enabled = true
+
+                    -- disturb some dust on the ground
+                    self:emit_dust(self.land_dust_parts, 0, -4, 3, 2)
+                end
             else
                 self.y = collision.y + collision.h
             end

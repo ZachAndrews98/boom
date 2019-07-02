@@ -19,9 +19,9 @@ return {
 
         -- focus box dimensions. all values are ratios of the screen size
         self.focus_hbox_size = 0.15
-        self.focus_vbox_size = 0.3
+        self.focus_vbox_size = 0.15
         self.focus_hbox_center = 0.3
-        self.focus_vbox_center = 0.7
+        self.focus_vbox_center = 0.5
 
         -- anim factor for camera size. higher is faster
         self.size_anim_factor = 2
