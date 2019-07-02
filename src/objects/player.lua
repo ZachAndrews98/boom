@@ -32,8 +32,14 @@ return {
         -- resources
         self.idle = sprite.create('32x32_player.png', self.w, self.h, 0.25)
         self.walk = sprite.create('32x32_player-walk.png', self.w, self.h, 0.1)
+        self.jump = sprite.create('32x32_player-jump.png', self.w, self.h, 0.05)
+
+        self.jump.looping = false
 
         self.spr = self.walk
+        self.spr:play()
+
+        self.spr = self.jump
         self.spr:play()
 
         -- create a camera for the player
@@ -105,6 +111,14 @@ return {
         if love.keyboard.isDown('up') and self.jump_enabled then
             self.dy = self.jump_dy
             self.jump_enabled = false
+
+            self.spr = self.jump
+            self.spr:play()
+        end
+
+        -- set the jumping animation if we're moving upward
+        if not self.jump_enabled then
+            self.spr = self.jump
         end
 
         -- slow the player down when 'down' is pressed
