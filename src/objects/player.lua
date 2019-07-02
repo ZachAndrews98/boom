@@ -152,7 +152,7 @@ return {
 
         if self.jump_enabled and not self.is_walking and math.abs(self.dx) > 40 then
             -- make the player slide
-            self:emit_dust(self.slide_dust_parts, self.dx / 100, -4, 1, 2, 0, 0.6)
+            self:emit_dust(self.slide_dust_parts, self.dx / 100, -4, 1, 2, 0, 0.3)
         end
 
         -- throw a grenade if we can/should
