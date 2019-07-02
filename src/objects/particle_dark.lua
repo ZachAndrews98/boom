@@ -24,9 +24,9 @@ return {
         self.dy_variation = self.dy_variation or self.dx_variation or 50
 
         -- const for dampening all the velocities
-        self.velocity_dampening = 100
+        self.velocity_dampening = 1000
 
-        self.spr = sprite.create('3x3_particle_dark.png', nil, nil, 0)
+        self.spr = sprite.create('1x1_particle_dark.png', nil, nil, 0)
         self.color = self.color or {1, 1, 1, 1}
 
         self.w = self.spr.frame_w

@@ -17,7 +17,7 @@ return {
         self.dx_accel = self.dx_accel or 1600
         self.dx_max = self.dx_max or 150
         self.grenade_dampening = 3
-        self.land_dust_parts = self.dust_parts or 5
+        self.land_dust_parts = self.dust_parts or 10
         self.slide_dust_parts = self.dust_parts or 1
 
         -- state
@@ -44,7 +44,7 @@ return {
             local left = this.x + 14
             local width = 10
 
-            if this.direction == 'left' then
+            if this.direction == 'right' then
                 -- player is flipped over, move the base point
                 left = this.x + 12
             end
@@ -52,7 +52,7 @@ return {
             for _=1,num do
                 obj.create(this.__layer, 'particle_dark', {
                     x = math.random(width) + left,
-                    y = this.y + this.h - 4,
+                    y = this.y + this.h - 1,
                     dx = dx,
                     dy = dy,
                     dx_variation = vdx,
