@@ -33,6 +33,11 @@ return {
 
         -- set the physics mask
         self.fixture:setMask(physics_groups.GIB, physics_groups.PHYSBOX)
+
+        -- allow camera transfer
+        self.give_camera = function(this, camera)
+            this.camera = camera
+        end
     end,
 
     destroy = function(self)
@@ -57,6 +62,12 @@ return {
 
         self.x, self.y = self.body:getPosition()
         self.angle = self.body:getAngle()
+
+        if self.camera then
+            self.camera:set_focus(self.x, self.x + self.w,
+                                  self.y, self.y + self.h,
+                                  true, 0, 0, 'right')
+        end
     end,
 
     render = function(self)
