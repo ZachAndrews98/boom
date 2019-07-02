@@ -28,6 +28,7 @@ return {
         self.direction = 'right'
         self.nade = nil
         self.throw_enabled = false
+        self.ground_object = nil -- last noclip object stood on
 
         -- resources
         self.idle = sprite.create('32x32_player.png', self.w, self.h, 0.25)
@@ -57,6 +58,7 @@ return {
 
             for _=1,num do
                 obj.create(this.__layer, 'particle_dark', {
+                    color = this.ground_object.dust_color,
                     x = math.random(width) + left,
                     y = this.y + this.h - 1,
                     dx = dx,
@@ -226,6 +228,9 @@ return {
             if self.dy >= 0 then
                 -- here it's safer to assume dy==0 -> the player was moving somewhat down-ish
                 self.y = collision.y - self.h
+
+                -- assign the new ground object
+                self.ground_object = collision
 
                 if not self.jump_enabled then
                     self.jump_enabled = true
