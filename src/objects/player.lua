@@ -57,7 +57,7 @@ return {
             end
 
             for _=1,num do
-                obj.create(this.__layer, 'particle_dark', {
+                obj.create(self.dust_layer or this.__layer, 'particle_dark', {
                     color = this.ground_object.dust_color,
                     x = math.random(width) + left,
                     y = this.y + this.h - 1,
@@ -88,6 +88,7 @@ return {
 
         -- find the world geometry layer if we haven't already
         self.geometry_layer = self.geometry_layer or map.layer_by_name('geometry')
+        self.dust_layer = self.dust_layer or map.layer_by_name('dust_particles')
 
         -- update velocity from inputs
         self.is_walking = false

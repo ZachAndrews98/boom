@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="256" height="256" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="51">
+<map version="1.2" tiledversion="1.2.3" orientation="orthogonal" renderorder="right-down" width="256" height="256" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="51">
  <tileset firstgid="1" source="../tiled/tileset_placeholder.json"/>
  <layer id="1" name="Tile Layer 1" width="256" height="256">
   <data encoding="csv">
@@ -261,6 +261,8 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
+ <objectgroup id="5" name="particles"/>
+ <objectgroup id="6" name="dust_particles"/>
  <objectgroup id="2" name="game_objects">
   <object id="17" name="player" type="player" x="115.115" y="240.562" width="32" height="32"/>
   <object id="43" name="kill_trigger" type="noclip" x="-159.105" y="449.767" width="2420.87" height="30.3593"/>
