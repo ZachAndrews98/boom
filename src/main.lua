@@ -15,7 +15,7 @@ function love.load()
     -- use nearest filtering over "blurry" linear filtering
     love.graphics.setDefaultFilter('linear', 'nearest')
 
-    map.load('intro')
+    map.load('main')
 end
 
 function love.keypressed(key)
