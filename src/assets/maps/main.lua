@@ -8,10 +8,37 @@ return {
   height = 100,
   tilewidth = 16,
   tileheight = 16,
-  nextlayerid = 3,
-  nextobjectid = 2,
+  nextlayerid = 4,
+  nextobjectid = 3,
   properties = {},
-  tilesets = {},
+  tilesets = {
+    {
+      name = "placeholder",
+      firstgid = 1,
+      filename = "../tiled/tileset_placeholder.json",
+      tilewidth = 16,
+      tileheight = 16,
+      spacing = 0,
+      margin = 0,
+      columns = 16,
+      image = "../sprites/4096x4096_tileset_placeholder.png",
+      imagewidth = 256,
+      imageheight = 256,
+      tileoffset = {
+        x = 0,
+        y = 0
+      },
+      grid = {
+        orientation = "orthogonal",
+        width = 16,
+        height = 16
+      },
+      properties = {},
+      terrains = {},
+      tilecount = 256,
+      tiles = {}
+    }
+  },
   layers = {
     {
       type = "tilelayer",
@@ -132,8 +159,20 @@ return {
     },
     {
       type = "objectgroup",
+      id = 3,
+      name = "geometry",
+      visible = true,
+      opacity = 1,
+      offsetx = 0,
+      offsety = 0,
+      draworder = "topdown",
+      properties = {},
+      objects = {}
+    },
+    {
+      type = "objectgroup",
       id = 2,
-      name = "Object Layer 1",
+      name = "game_objects",
       visible = true,
       opacity = 1,
       offsetx = 0,
@@ -143,8 +182,8 @@ return {
       objects = {
         {
           id = 1,
-          name = "New Game",
-          type = "button",
+          name = "New Game Button",
+          type = "button-new",
           shape = "rectangle",
           x = 624,
           y = 656,
@@ -153,8 +192,21 @@ return {
           rotation = 0,
           visible = true,
           properties = {
-            ["button"] = "newgame"
+            ["image"] = "menu-buttons/new.png"
           }
+        },
+        {
+          id = 2,
+          name = "player",
+          type = "player",
+          shape = "rectangle",
+          x = 640,
+          y = 560,
+          width = 32,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {}
         }
       }
     }
