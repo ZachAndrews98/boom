@@ -9,7 +9,7 @@ return {
   tilewidth = 16,
   tileheight = 16,
   nextlayerid = 4,
-  nextobjectid = 3,
+  nextobjectid = 6,
   properties = {},
   tilesets = {
     {
@@ -167,7 +167,21 @@ return {
       offsety = 0,
       draworder = "topdown",
       properties = {},
-      objects = {}
+      objects = {
+        {
+          id = 4,
+          name = "",
+          type = "noclip",
+          shape = "rectangle",
+          x = 640,
+          y = 656,
+          width = 32,
+          height = 16,
+          rotation = 0,
+          visible = true,
+          properties = {}
+        }
+      }
     },
     {
       type = "objectgroup",
@@ -186,13 +200,13 @@ return {
           type = "button-new",
           shape = "rectangle",
           x = 624,
-          y = 656,
+          y = 640,
           width = 60,
           height = 32,
           rotation = 0,
           visible = true,
           properties = {
-            ["image"] = "menu-buttons/new.png"
+            ["image"] = "new.png"
           }
         },
         {
