@@ -9,7 +9,7 @@ return {
   tilewidth = 16,
   tileheight = 16,
   nextlayerid = 4,
-  nextobjectid = 6,
+  nextobjectid = 8,
   properties = {},
   tilesets = {
     {
@@ -167,21 +167,7 @@ return {
       offsety = 0,
       draworder = "topdown",
       properties = {},
-      objects = {
-        {
-          id = 4,
-          name = "",
-          type = "noclip",
-          shape = "rectangle",
-          x = 640,
-          y = 656,
-          width = 32,
-          height = 16,
-          rotation = 0,
-          visible = true,
-          properties = {}
-        }
-      }
+      objects = {}
     },
     {
       type = "objectgroup",
@@ -199,28 +185,45 @@ return {
           name = "New Game Button",
           type = "button-new",
           shape = "rectangle",
-          x = 624,
-          y = 640,
+          x = 144,
+          y = 0,
           width = 60,
           height = 32,
           rotation = 0,
           visible = true,
           properties = {
-            ["image"] = "new.png"
+            ["image"] = "60x32_new.png"
           }
         },
         {
-          id = 2,
-          name = "player",
-          type = "player",
+          id = 6,
+          name = "Continue Button",
+          type = "button-cont",
           shape = "rectangle",
-          x = 640,
-          y = 560,
-          width = 32,
+          x = 144,
+          y = 64,
+          width = 60,
           height = 32,
           rotation = 0,
           visible = true,
-          properties = {}
+          properties = {
+            ["image"] = "60x32_new.png"
+          }
+        },
+        {
+          id = 7,
+          name = "Quit Button",
+          type = "button-quit",
+          shape = "rectangle",
+          x = 144,
+          y = 128,
+          width = 60,
+          height = 32,
+          rotation = 0,
+          visible = true,
+          properties = {
+            ["image"] = "60x32_new.png"
+          }
         }
       }
     }
