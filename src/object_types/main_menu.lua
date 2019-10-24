@@ -365,33 +365,33 @@ return {
                               cb.x + cb.w / 2, cb.y * (cb.h / 8),
                               this.subfont)
 
-            local control_text = strings.get('CONTROL_MENU_JUMP') .. tostring(input.get_key('jump'))
-            this:draw_element(control_text,
+            local control_text_jump = strings.get('CONTROL_MENU_JUMP') .. tostring(input.get_key('jump'))
+            this:draw_element(control_text_jump,
                               cb.x + cb.w / 2, cb.y + 1 * (cb.h / 8),
                               this.subfont)
 
-            local control_text = strings.get('CONTROL_MENU_LEFT') .. tostring(input.get_key('left'))
-            this:draw_element(control_text,
+            local control_text_left = strings.get('CONTROL_MENU_LEFT') .. tostring(input.get_key('left'))
+            this:draw_element(control_text_left,
                               cb.x + cb.w / 2, cb.y + 2 * (cb.h / 8),
                               this.subfont)
 
-            local control_text = strings.get('CONTROL_MENU_RIGHT') .. tostring(input.get_key('right'))
-            this:draw_element(control_text,
+            local control_text_right = strings.get('CONTROL_MENU_RIGHT') .. tostring(input.get_key('right'))
+            this:draw_element(control_text_right,
                               cb.x + cb.w / 2, cb.y + 3 * (cb.h / 8),
                               this.subfont)
 
-            local control_text = strings.get('CONTROL_MENU_CROUCH') .. tostring(input.get_key('crouch'))
-            this:draw_element(control_text,
+            local control_text_crouch = strings.get('CONTROL_MENU_CROUCH') .. tostring(input.get_key('crouch'))
+            this:draw_element(control_text_crouch,
                               cb.x + cb.w / 2, cb.y + 4 * (cb.h / 8),
                               this.subfont)
 
-            local control_text = strings.get('CONTROL_MENU_INTERACT') .. tostring(input.get_key('interact'))
-            this:draw_element(control_text,
+            local control_text_interact = strings.get('CONTROL_MENU_INTERACT') .. tostring(input.get_key('interact'))
+            this:draw_element(control_text_interact,
                               cb.x + cb.w / 2, cb.y + 5 * (cb.h / 8),
                               this.subfont)
 
-            local control_text = strings.get('CONTROL_MENU_THROW') .. tostring(input.get_key('throw'))
-            this:draw_element(control_text,
+            local control_text_throw = strings.get('CONTROL_MENU_THROW') .. tostring(input.get_key('throw'))
+            this:draw_element(control_text_throw,
                               cb.x + cb.w / 2, cb.y + 6 * (cb.h / 8),
                               this.subfont)
 
