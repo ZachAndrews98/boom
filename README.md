@@ -29,12 +29,12 @@ Before running the game you'll need to install the Love2d engine. Love is
 available on the official repositories for most linux distributions.
 If you need help or don't know how to install love2d for your system you can
 check out the [Love2d website](https://love2d.org). Most linux distributions
-can install love with the command: 
+can install love with the command:
 
 ```BASH
 apt install love
 ```
-## Boom. 
+## Boom.
 
 Boom can be run either by executing the `boom` executable
 

@@ -19,6 +19,7 @@ local map     = require 'map'
 local object  = require 'object'
 local opts    = require 'opts'
 local strings = require 'strings'
+local input   = require 'input'
 
 return {
     init = function(this)
@@ -31,6 +32,7 @@ return {
         this.STATE_OPTIONS         = 1
         this.STATE_OPTIONS_CONFIRM = 2
         this.CONFIRM_TIMER_LEN     = 10
+        this.STATE_CONTROLS        = 3
 
         -- State.
         this.state = this.STATE_MAIN
@@ -38,6 +40,7 @@ return {
         this.main_menu_option = 1
         this.options_menu_option = 1
         this.confirm_menu_option = 1
+        this.controls_menu_option = 1
         this.confirm_timer = 0
 
         -- Grab previous save state.
@@ -170,8 +173,11 @@ return {
             elseif this.state == this.STATE_OPTIONS then
                 -- Handle options menu buttons.
                 -- Most options are selectors -- just handle confirm/cancel buttons.
-
                 if this.options_menu_option == 4 then
+                  this.state = this.STATE_CONTROLS
+                end
+
+                if this.options_menu_option == 5 then
                     -- Confirm button. Apply video settings and move to confirm menu.
 
                     -- Grab the current mode and save it.
@@ -193,6 +199,11 @@ return {
                     this.state = this.STATE_MAIN
                     this.option = 1
                 end
+            elseif this.state == this.STATE_CONTROLS then
+              if this.options_menu_option == 5 then
+                this.state = this.STATE_MAIN
+                this.option = 1
+              end
             elseif this.state == this.STATE_OPTIONS_CONFIRM and this.confirm_timer < this.CONFIRM_TIMER_LEN - 1 then
                 -- Handle confirm menu options.
                 if this.confirm_menu_option == 1 then
@@ -225,6 +236,7 @@ return {
         this.main_menu_option = ((this.option - 1) % 3) + 1
         this.options_menu_option = ((this.option - 1) % 5) + 1
         this.confirm_menu_option = ((this.option - 1) % 2) + 1
+        this.controls_menu_option = ((this.option - 1) % 1) + 1
     end,
 
     update = function(this, dt)
@@ -311,15 +323,22 @@ return {
                               cb.x + cb.w / 2, cb.y + 3 * (cb.h / 6),
                               this.subfont, this.options_menu_option == 3)
 
-            -- Render OK and cancel buttons.
-            --
-            this:draw_element(strings.get('OPTIONS_MENU_OK'),
+            -- Render CONTROL option.
+            local control_text = strings.get('OPTIONS_MENU_CONTROLS'):sub(0, 8)
+            this:draw_element(control_text,
                               cb.x + cb.w / 2, cb.y + 4 * (cb.h / 6),
                               this.subfont, this.options_menu_option == 4)
 
-            this:draw_element(strings.get('OPTIONS_MENU_CANCEL'),
+            -- Render OK and cancel buttons.
+            --
+            this:draw_element(strings.get('OPTIONS_MENU_OK'),
                               cb.x + cb.w / 2, cb.y + 5 * (cb.h / 6),
                               this.subfont, this.options_menu_option == 5)
+
+            this:draw_element(strings.get('OPTIONS_MENU_CANCEL'),
+                              cb.x + cb.w / 2, cb.y + 6 * (cb.h / 6),
+                              this.subfont, this.options_menu_option == 6)
+
 
         elseif this.state == this.STATE_OPTIONS_CONFIRM then
             -- Render confirm message.
@@ -337,6 +356,48 @@ return {
             this:draw_element(strings.get('CONFIRM_MENU_OK'),
                               cb.x + cb.w / 2, cb.y + 3 * (cb.h / 4),
                               this.subfont, this.confirm_menu_option == 2)
+
+        elseif this.state == this.STATE_CONTROLS then
+            -- Render Controls menu.
+
+            local control_text = strings.get('OPTIONS_MENU_CONTROLS')
+            this:draw_element(control_text,
+                              cb.x + cb.w / 2, cb.y * (cb.h / 8),
+                              this.subfont)
+
+            local control_text = strings.get('CONTROL_MENU_JUMP') .. tostring(input.get_key('jump'))
+            this:draw_element(control_text,
+                              cb.x + cb.w / 2, cb.y + 1 * (cb.h / 8),
+                              this.subfont)
+
+            local control_text = strings.get('CONTROL_MENU_LEFT') .. tostring(input.get_key('left'))
+            this:draw_element(control_text,
+                              cb.x + cb.w / 2, cb.y + 2 * (cb.h / 8),
+                              this.subfont)
+
+            local control_text = strings.get('CONTROL_MENU_RIGHT') .. tostring(input.get_key('right'))
+            this:draw_element(control_text,
+                              cb.x + cb.w / 2, cb.y + 3 * (cb.h / 8),
+                              this.subfont)
+
+            local control_text = strings.get('CONTROL_MENU_CROUCH') .. tostring(input.get_key('crouch'))
+            this:draw_element(control_text,
+                              cb.x + cb.w / 2, cb.y + 4 * (cb.h / 8),
+                              this.subfont)
+
+            local control_text = strings.get('CONTROL_MENU_INTERACT') .. tostring(input.get_key('interact'))
+            this:draw_element(control_text,
+                              cb.x + cb.w / 2, cb.y + 5 * (cb.h / 8),
+                              this.subfont)
+
+            local control_text = strings.get('CONTROL_MENU_THROW') .. tostring(input.get_key('throw'))
+            this:draw_element(control_text,
+                              cb.x + cb.w / 2, cb.y + 6 * (cb.h / 8),
+                              this.subfont)
+
+            this:draw_element(strings.get('OPTIONS_MENU_OK'),
+                              cb.x + cb.w / 2, cb.y + 7 * (cb.h / 8),
+                              this.subfont, this.options_menu_option == 5)
         end
     end,
 }

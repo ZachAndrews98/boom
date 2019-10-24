@@ -14,6 +14,14 @@ local input = {
     }
 }
 
+function input.get_key(value)
+  for k, _ in pairs(input.keybinds) do
+    if input.keybinds[k] == value then
+      return k
+    end
+  end
+end
+
 --- Translate a key value to an input name.
 function input.translate(key)
     return input.keybinds[key]

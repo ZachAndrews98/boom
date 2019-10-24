@@ -10,7 +10,6 @@ local strings = {
 -- @param lang Language to load, from strings/<name>.lua
 function strings.load(lang)
     local status, result = pcall(function() return require ('strings/' .. lang) end)
-
     if status then
         strings.vals = result
     else
