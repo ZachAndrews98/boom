@@ -200,7 +200,7 @@ return {
                     this.option = 1
                 end
             elseif this.state == this.STATE_CONTROLS then
-              if this.options_menu_option == 5 then
+              if this.controls_menu_option == 1 then
                 this.state = this.STATE_MAIN
                 this.option = 1
               end
@@ -397,7 +397,7 @@ return {
 
             this:draw_element(strings.get('OPTIONS_MENU_OK'),
                               cb.x + cb.w / 2, cb.y + 7 * (cb.h / 8),
-                              this.subfont, this.options_menu_option == 5)
+                              this.subfont, this.controls_menu_option == 1)
         end
     end,
 }
